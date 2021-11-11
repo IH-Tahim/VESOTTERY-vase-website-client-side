@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthProvider from './Contexts/AuthProvider';
 import Footer from './Pages/Shared/Footer/Footer';
 import Home from './Pages/Home/Home';
+import Navigation from './Pages/Shared/Navigation/Navigation';
 
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 
         <Router>
 
-          {/* <Header /> */}
+          <Navigation />
           <Switch>
             <Route exact path="/">
               <Home></Home>
