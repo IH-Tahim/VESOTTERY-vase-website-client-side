@@ -2,14 +2,23 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AuthProvider from './Contexts/AuthProvider';
+import Footer from './Pages/Shared/Footer/Footer';
+import Home from './Pages/Home/Home';
+
 
 function App() {
+
   return (
     <div className="App">
       <AuthProvider>
+
         <Router>
+
           {/* <Header /> */}
           <Switch>
+            <Route exact path="/">
+              <Home></Home>
+            </Route>
             {/* <Route exact path="/">
               <Home></Home>
             </Route>
@@ -47,7 +56,7 @@ function App() {
             </Route> */}
 
           </Switch>
-          {/* <Footer></Footer> */}
+          <Footer></Footer>
         </Router>
       </AuthProvider>
     </div>
