@@ -5,6 +5,8 @@ import AuthProvider from './Contexts/AuthProvider';
 import Footer from './Pages/Shared/Footer/Footer';
 import Home from './Pages/Home/Home';
 import Navigation from './Pages/Shared/Navigation/Navigation';
+import Login from './Pages/Login/Login';
+import Register from './Pages/Register/Register';
 
 
 function App() {
@@ -19,6 +21,15 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home></Home>
+            </Route>
+            <Route path="/home">
+              <Home></Home>
+            </Route>
+            <Route path="/login">
+              <Login></Login>
+            </Route>
+            <Route path="/register">
+              <Register></Register>
             </Route>
             {/* <Route exact path="/">
               <Home></Home>
