@@ -1,13 +1,32 @@
-import React from 'react';
-import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Alert, Col, Container, FloatingLabel, Form, Row, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import useAuth from '../../Hooks/useAuth';
 import loginImg from '../../images/register.svg';
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-    console.log(errors);
+    const [matchPass, setMatchPass] = useState("");
+    const { emailRegister, authError, user, loading, googleSignIn } = useAuth();
+    const location = "/";
+    const history = useHistory();
+
+    const { register, handleSubmit, reset } = useForm();
+
+    const onSubmit = data => {
+        if (data.password === data.reEnterPassword) {
+            emailRegister(data.email, data.password, data.name, history);
+            reset();
+
+
+        } else {
+            setMatchPass("Your Password didn't Match. Please Retype The Password");
+
+        }
+    }
+    const handelGoogleLogin = () => {
+        googleSignIn(location, history);
+    }
     return (
         <Container>
             <Row className="my-4">
@@ -15,29 +34,33 @@ const Register = () => {
                     <h2 className="text-center mb-4">Register Now</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
-                        <FloatingLabel controlId="floatingText" label="Your Name" className="mb-3">
+                        <FloatingLabel controlId="floatingText" label="Your Name *" className="mb-3">
                             <Form.Control type="text" placeholder="Name" {...register("name", { required: true })} />
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3">
+                        <FloatingLabel controlId="floatingInput" label="Email address *" className="mb-3">
                             <Form.Control type="email" placeholder="name@example.com"  {...register("email", { required: true, pattern: /^\S+@\S+$/i })} />
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="floatingPassword" label="Password" className="mb-3">
+                        <FloatingLabel controlId="floatingPassword" label="Password *" className="mb-3">
                             <Form.Control type="password" placeholder="Password" {...register("password", { required: true })} />
                         </FloatingLabel>
 
-                        <FloatingLabel controlId="floatingPassword" label="Re-Enter Password" className="mb-3">
+                        <FloatingLabel controlId="floatingRePassword" label="Re-Enter Password *" className="mb-3">
                             <Form.Control type="password" placeholder="Re-Enter Password" {...register("reEnterPassword", { required: true })} />
+                            <small className="text-danger">{matchPass}</small>
                         </FloatingLabel>
 
 
-                        <input type="submit" className="btn btn-dark mb-3" value="Register"></input>
+                        {user?.email ? <span className="text-info">You Are Already Logedin </span> : <input type="submit" className="btn btn-dark mb-3" value="Register"></input>} {loading && <Spinner className="ms-3" animation="border" variant="primary" />}
 
 
                     </form>
+                    {user?.email && <Alert variant="success">User Create Successfully.</Alert>}
+                    {authError && <Alert variant="danger">{authError}</Alert>}
+
                     <Link to="/login" className="text-decoration-none d-block mb-3">Already Have an Account? Login Here</Link>
-                    <button className="btn btn-warning">Register With Google</button>
+                    <button className="btn btn-warning" onClick={handelGoogleLogin}>Register With Google</button>
                 </Col>
                 <Col md={6} className="d-md-none d-lg-block text-center">
                     <img src={loginImg} alt="" className="w-75" />
