@@ -1,0 +1,15 @@
+
+.banner-container{
+    display: flex;
+    align-items: center;
+}
+.banner-text{
+    letter-spacing: 2.5px;
+    font-size: 35px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.banner-text span{
+    font-size: 50px;
+    font-family: 'Raleway', sans-serif;
+}

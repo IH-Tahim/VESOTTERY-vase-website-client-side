@@ -7,6 +7,9 @@ import Home from './Pages/Home/Home';
 import Navigation from './Pages/Shared/Navigation/Navigation';
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
+import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
+import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
+import Reviews from './Pages/Reviews/Reviews';
 
 
 function App() {
@@ -25,6 +28,16 @@ function App() {
             <Route path="/home">
               <Home></Home>
             </Route>
+
+            <PrivateRoute path="/placeorder/:orderId">
+              <PlaceOrder></PlaceOrder>
+            </PrivateRoute>
+
+            <Route path="/rev">
+              <Reviews></Reviews>
+            </Route>
+
+
             <Route path="/login">
               <Login></Login>
             </Route>
