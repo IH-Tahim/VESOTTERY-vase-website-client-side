@@ -17,14 +17,13 @@ const Navigation = () => {
                         <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
                             <Nav>
                                 <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                                <Nav.Link as={Link} to="/about">About</Nav.Link>
-                                <Nav.Link as={Link} to="/tours">All Tours</Nav.Link>
+                                <Nav.Link as={Link} to="/products">Explore Products</Nav.Link>
                                 <Nav.Link as={Link} to="/blogs">Blog</Nav.Link>
+                                <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                                 {user?.email ?
                                     <NavDropdown title={user.displayName} id="collasible-nav-dropdown">
-                                        <NavDropdown.Item as={Link} to="/myOrders">My Orders</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/addtour">Add Tour</NavDropdown.Item>
-                                        <NavDropdown.Item as={Link} to="/manageOrders">Manage All Orders</NavDropdown.Item>
+                                        <NavDropdown.Item as={Link} to="/dashboard">My Dashboard</NavDropdown.Item>
+
                                         <NavDropdown.Divider />
                                         <NavDropdown.Item onClick={logOut} >Log Out</NavDropdown.Item>
                                     </NavDropdown> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}

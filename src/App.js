@@ -10,6 +10,10 @@ import Register from './Pages/Register/Register';
 import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import PlaceOrder from './Pages/PlaceOrder/PlaceOrder';
 import Reviews from './Pages/Reviews/Reviews';
+import AllProducts from './Pages/AllProducts/AllProducts';
+import NotFound from './Pages/NotFound/NotFound';
+import Blogs from './Pages/Blogs/Blogs';
+import Dashboard from './Pages/Dashboard/Dashboard';
 
 
 function App() {
@@ -32,10 +36,15 @@ function App() {
             <PrivateRoute path="/placeorder/:orderId">
               <PlaceOrder></PlaceOrder>
             </PrivateRoute>
-
-            <Route path="/rev">
-              <Reviews></Reviews>
+            <Route path="/products">
+              <AllProducts></AllProducts>
             </Route>
+            <Route path="/blogs">
+              <Blogs></Blogs>
+            </Route>
+            <PrivateRoute path="/dashboard">
+              <Dashboard></Dashboard>
+            </PrivateRoute>
 
 
             <Route path="/login">
@@ -43,6 +52,10 @@ function App() {
             </Route>
             <Route path="/register">
               <Register></Register>
+            </Route>
+
+            <Route path="*">
+              <NotFound></NotFound>
             </Route>
             {/* <Route exact path="/">
               <Home></Home>

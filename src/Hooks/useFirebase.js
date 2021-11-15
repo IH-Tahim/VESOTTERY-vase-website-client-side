@@ -12,6 +12,8 @@ const useFirebase = () => {
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
     const [authError, setAuthError] = useState('');
+    const [admin, setAdmin] = useState();
+    // const [adminLoading, setAdminLoading] = useState(true);
 
 
     const googleProvider = new GoogleAuthProvider();
@@ -29,6 +31,9 @@ const useFirebase = () => {
             .then((result) => {
                 setUser(result.user);
                 setAuthError('');
+
+                saveUser(result.user.email, result.user.displayName, "PUT");
+
                 const destination = location?.state?.from || "/";
                 history.replace(destination);
             }).catch((error) => {
@@ -44,9 +49,13 @@ const useFirebase = () => {
         setLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                setAuthError('');
                 const newUser = { email, displayName: name };
                 setUser(newUser);
-                setAuthError('');
+
+                //Save User To Database
+                saveUser(email, name, "POST");
+
 
                 updateProfile(auth.currentUser, {
                     displayName: name
@@ -103,6 +112,33 @@ const useFirebase = () => {
         })
     }, [])
 
+
+    // Authenticate Admin
+    useEffect(() => {
+        // setAdminLoading(true);
+        fetch(`https://enigmatic-harbor-71567.herokuapp.com/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => {
+                setAdmin(data.admin);
+            })
+        // .finally(() => setAdminLoading(false))
+    }, [user?.email])
+
+
+
+    //Set User To DataBase
+    const saveUser = (email, displayName, method) => {
+        const user = { email, displayName };
+        fetch('https://enigmatic-harbor-71567.herokuapp.com/users', {
+            method: method,
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then()
+    }
+
     // Handel Logout user
 
     const logOut = () => {
@@ -120,7 +156,8 @@ const useFirebase = () => {
         user,
         logOut,
         loading,
-        authError
+        authError,
+        admin
     }
 };
 
