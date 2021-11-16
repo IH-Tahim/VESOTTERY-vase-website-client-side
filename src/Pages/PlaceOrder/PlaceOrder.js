@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Col, Container, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import useAuth from '../../Hooks/useAuth';
 
 const PlaceOrder = () => {
     const { register, handleSubmit } = useForm();
     const { user } = useAuth();
     const { orderId } = useParams();
+
+    const history = useHistory();
 
     const [orderDetails, setOrderDetails] = useState({});
 
@@ -34,13 +36,12 @@ const PlaceOrder = () => {
         })
             .then(res => res.json())
             .then(data => {
-                // console.log(data);
+                console.log(data);
+                if (data.acknowledged) {
+                    alert("Placed Order Successfully");
+                    history.push("/dashboard/myorders");
+                }
             })
-
-
-        console.log(orderDetails);
-        console.log(rest);
-        console.log(data);
     };
 
 

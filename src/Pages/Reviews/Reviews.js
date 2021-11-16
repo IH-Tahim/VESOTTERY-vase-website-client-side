@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Reviews.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import { RatingView, Rating } from 'react-simple-star-rating';
+import { RatingView } from 'react-simple-star-rating';
 
 const Reviews = () => {
-    const [rating, setRating] = useState(5) // initial rating value
+    const [reviews, setReviews] = useState([]);
+    useEffect(() => {
+        fetch('https://enigmatic-harbor-71567.herokuapp.com/review')
+            .then(res => res.json())
+            .then(data => {
 
-    // Catch Rating value
-    const handleRating = (rate) => {
-        console.log(rate);
-        setRating(rate)
-        // Some logic
-    }
-    console.log(rating);
+                setReviews(data);
+            })
+    }, [])
+
 
     return (
         <div className="mb-5">
@@ -27,18 +28,19 @@ const Reviews = () => {
                 autoPlay={true}
                 interval={6100}
             >
-                <div>
-                    <img src="https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" />
+                {reviews.map((review) => <div key={review._id}>
+                    <img src={review.img} alt="" />
                     <div className="myCarousel">
-                        <h3 className="mt-3">Name</h3>
-                        <Rating onClick={handleRating} ratingValue={rating} /* Rating Props */ />
-                        <h4>Designer</h4>
-                        <RatingView ratingValue={2} />
+                        <h3 className="mt-3">{review.name}</h3>
+
+
+                        <RatingView ratingValue={review.rating} />
                         <p>
-                            Description
+                            {review.review}
                         </p>
                     </div>
-                </div>
+                </div>)}
+
 
 
             </Carousel>

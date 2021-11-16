@@ -120,9 +120,9 @@ const useFirebase = () => {
             .then(res => res.json())
             .then(data => {
                 setAdmin(data.admin);
-            })
+            }).catch(err => console.log(err))
         // .finally(() => setAdminLoading(false))
-    }, [user?.email])
+    }, [user.email])
 
 
 
