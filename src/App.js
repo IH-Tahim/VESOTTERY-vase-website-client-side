@@ -14,6 +14,7 @@ import AllProducts from './Pages/AllProducts/AllProducts';
 import NotFound from './Pages/NotFound/NotFound';
 import Blogs from './Pages/Blogs/Blogs';
 import Dashboard from './Pages/Dashboard/Dashboard';
+import About from './Pages/About/About';
 
 
 function App() {
@@ -31,6 +32,10 @@ function App() {
             </Route>
             <Route path="/home">
               <Home></Home>
+            </Route>
+
+            <Route path="/about">
+              <About></About>
             </Route>
 
             <PrivateRoute path="/placeorder/:orderId">

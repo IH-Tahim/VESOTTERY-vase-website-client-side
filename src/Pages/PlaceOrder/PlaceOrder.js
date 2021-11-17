@@ -26,6 +26,7 @@ const PlaceOrder = () => {
         orderDetails.email = user.email;
         orderDetails.userName = data.name;
         orderDetails.address = data.address;
+        orderDetails.status = "pending";
 
         const { _id, ...rest } = orderDetails;
 

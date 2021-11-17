@@ -50,8 +50,9 @@ const MyOrders = () => {
                                     <Card.Text className="text-truncate">
                                         {product.details}
                                     </Card.Text>
+                                    <p className="text-warning">Order Status : {product.status}</p>
                                 </Card.Body>
-                                <Button variant="dark" onClick={() => { handelCancelOrder(product._id) }}>Cancel Order</Button>
+                                <Button variant="danger" onClick={() => { handelCancelOrder(product._id) }}>Cancel Order</Button>
 
                             </Card>
                         </Col>)

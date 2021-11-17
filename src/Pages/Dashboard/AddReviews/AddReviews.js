@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Col, Container, Form, Row } from 'react-bootstrap';
+import { Alert, Container, Form, Row } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import useAuth from '../../../Hooks/useAuth';
 

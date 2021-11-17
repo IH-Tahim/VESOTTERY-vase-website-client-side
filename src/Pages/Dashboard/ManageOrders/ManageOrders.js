@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Container, Row, Button, Col } from 'react-bootstrap';
-import useAuth from '../../../Hooks/useAuth';
+
 
 const ManageOrders = () => {
-    const { user } = useAuth();
+
     const [myOrders, setMyOrders] = useState([]);
     const [isChanged, setIsChanged] = useState(false);
+    const [statusStyle, setStatusStyle] = useState('');
+
+
 
     useEffect(() => {
         fetch(`https://enigmatic-harbor-71567.herokuapp.com/allorders`)
@@ -34,6 +37,23 @@ const ManageOrders = () => {
                 })
         }
     }
+
+
+    const handelShippedOrder = id => {
+        const proceed = window.confirm('Are You Sure You Want To Delete This Order?');
+        if (proceed) {
+            fetch(`https://enigmatic-harbor-71567.herokuapp.com/shipped/${id}`, {
+                method: 'PUT'
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.acknowledged) {
+                        setIsChanged(true);
+                    }
+                    console.log(data);
+                })
+        }
+    }
     return (
         <div>
             <h2 className="text-center">my Order</h2>
@@ -50,10 +70,17 @@ const ManageOrders = () => {
                                     <Card.Title>{product.title}</Card.Title>
                                     <Card.Text className="text-truncate">
                                         {product.details}
+
                                     </Card.Text>
+                                    <p>Address: {product.address}</p>
+                                    <p className="text-info">Order Status: {product.status}</p>
+                                    <small className="text-center">Placed By: {product.email}</small>
                                 </Card.Body>
-                                <small className="text-center">Placed By: {product.email}</small>
-                                <Button variant="dark" onClick={() => { handelCancelOrder(product._id) }}>Cancel Order</Button>
+
+
+
+                                <Button variant="secondary" className="mb-2 " onClick={() => { handelShippedOrder(product._id) }}>Ship Product</Button>
+                                <Button variant="danger" onClick={() => { handelCancelOrder(product._id) }}>Cancel Order</Button>
 
                             </Card>
                         </Col>)
