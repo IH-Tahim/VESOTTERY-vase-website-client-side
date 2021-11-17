@@ -6,7 +6,7 @@ const ManageOrders = () => {
 
     const [myOrders, setMyOrders] = useState([]);
     const [isChanged, setIsChanged] = useState(false);
-    const [statusStyle, setStatusStyle] = useState('');
+
 
 
 
