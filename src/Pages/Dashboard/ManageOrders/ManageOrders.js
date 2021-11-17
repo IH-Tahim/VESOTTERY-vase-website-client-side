@@ -40,7 +40,7 @@ const ManageOrders = () => {
 
 
     const handelShippedOrder = id => {
-        const proceed = window.confirm('Are You Sure You Want To Delete This Order?');
+        const proceed = window.confirm('Are You Sure You Want To Deliver This Order Now?');
         if (proceed) {
             fetch(`https://enigmatic-harbor-71567.herokuapp.com/shipped/${id}`, {
                 method: 'PUT'
