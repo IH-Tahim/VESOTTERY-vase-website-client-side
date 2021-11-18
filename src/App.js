@@ -14,6 +14,8 @@ import NotFound from './Pages/NotFound/NotFound';
 import Blogs from './Pages/Blogs/Blogs';
 import Dashboard from './Pages/Dashboard/Dashboard';
 import About from './Pages/About/About';
+import AdminRoute from './Pages/Login/AdminRoute/AdminRoute';
+import Admin from './Pages/Admin/Admin';
 
 
 function App() {
@@ -46,9 +48,14 @@ function App() {
             <Route path="/blogs">
               <Blogs></Blogs>
             </Route>
+
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
             </PrivateRoute>
+
+            <AdminRoute path="/admin">
+              <Admin></Admin>
+            </AdminRoute>
 
 
             <Route path="/login">

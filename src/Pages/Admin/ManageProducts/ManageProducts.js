@@ -48,7 +48,7 @@ const ManageProducts = () => {
                                         {product.details}
                                     </Card.Text>
                                 </Card.Body>
-                                <Button variant="dark" onClick={() => { handelDeleteOrder(product._id) }}>Delete Product</Button>
+                                <Button variant="danger" onClick={() => { handelDeleteOrder(product._id) }}>Delete Product</Button>
 
                             </Card>
                         </Col>)

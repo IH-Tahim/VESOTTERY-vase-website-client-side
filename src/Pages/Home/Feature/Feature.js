@@ -2,7 +2,7 @@ import React from 'react';
 import './Feature.css';
 import { Col, Container, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHistory, faUserClock, faParachuteBox, faSkiingNordic, faUmbrellaBeach, faTruck, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
+import { faHistory, faUserClock, faTruck, faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 const Feature = () => {
     return (

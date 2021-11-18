@@ -110,7 +110,7 @@ const useFirebase = () => {
             }
             setLoading(false);
         })
-    }, [])
+    }, [auth])
 
 
     // Authenticate Admin

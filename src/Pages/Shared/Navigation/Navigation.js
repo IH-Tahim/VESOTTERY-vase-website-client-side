@@ -5,39 +5,38 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../../Hooks/useAuth';
 
 const Navigation = () => {
-    const { logOut, user } = useAuth();
+    const { logOut, user, admin } = useAuth();
     return (
-        <div>
-            <>
-                <Navbar bg="light" variant="light" expand="lg" sticky="top">
-                    <Container>
-                        <Navbar.Brand as={Link} to="/" className="main_logo">VESOTTERY</Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
-                            <Nav>
-                                <Nav.Link as={Link} to="/home">Home</Nav.Link>
-                                <Nav.Link as={Link} to="/about">About</Nav.Link>
-                                <Nav.Link as={Link} to="/products">Explore Products</Nav.Link>
-                                <Nav.Link as={Link} to="/blogs">Blog</Nav.Link>
+        <>
+            <Navbar bg="light" variant="light" expand="lg" sticky="top">
+                <Container>
+                    <Navbar.Brand as={Link} to="/" className="main_logo">VESOTTERY</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-                                {user?.email ?
-                                    <NavDropdown title={user.displayName} id="collasible-nav-dropdown">
-                                        <NavDropdown.Item as={Link} to="/dashboard">My Dashboard</NavDropdown.Item>
+                    <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
+                        <Nav>
+                            <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/about">About</Nav.Link>
+                            <Nav.Link as={Link} to="/products">Explore Products</Nav.Link>
+                            <Nav.Link as={Link} to="/blogs">Blog</Nav.Link>
+                            {admin ? <Nav.Link as={Link} to="/admin">Admin</Nav.Link> : <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>}
 
-                                        <NavDropdown.Divider />
-                                        <NavDropdown.Item onClick={logOut} >Log Out</NavDropdown.Item>
-                                    </NavDropdown> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
+                            {user?.email ?
+                                <NavDropdown title={user.displayName} id="collasible-nav-dropdown">
 
+                                    <NavDropdown.Item onClick={logOut} >Log Out</NavDropdown.Item>
+                                </NavDropdown> : <Nav.Link as={Link} to="/login">Login</Nav.Link>}
 
 
 
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </>
-        </div>
+
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </>
+
     );
 };
 
